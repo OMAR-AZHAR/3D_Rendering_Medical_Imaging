@@ -1,19 +1,9 @@
-# Med3Web DICOM 2D/3D web viewer.
+# MID Lab DICOM 3D Renderer.
 
-MIDL 3D is a high performance web tool for advanced visualization (both in 2D and 3D modes)
+MIDL 3D Renderer 3D is a high performance web tool for advanced visualization (both in 2D and 3D modes)
 medical volumetric data, provided in popular file formats: DICOM, NIfTI, KTX<sup>™</sup>, HDR.
 
 ## Description
-
-Med3Web can read local data from files/folders and from predefined web locations.
-
-The [demonstration project](https://med3web.opensource.epam.com/) shows both (local data / remote data) usage types.
-
-![Background image](public/images/med3web_logo.png)
-
-## Motivation
-
-Med3Web can be used in a medical center with diagnostic equipment.
 
 - ⚡️ MRI and CT scanning results can be viewed in any computer (inside the medical office and in the client home)
 - 💡 Qualified medical personnel can provide diagnosis or conclusion based on provided visualization.
@@ -50,21 +40,4 @@ Three.js is used as some gateway to WebGL renderer. The current Three.js version
 so we use tricky way to build 2D texture from initial 3D texture by linking 2D slices all together
 as a large tile map. This idea (with source codes) can be seen in project [WebGL Volume Rendering](https://github.com/lebarba/WebGLVolumeRendering).
 
-# Publications 
-Links to publications that contain **med3web** references
-* [Belyaev, S., Smirnov, P., Smirnova, N., Shubnikov, V. Fast adaptive undersampling for volume rendering](http://dx.doi.org/10.24132/JWSCG.2019.27.1.1)
-* [Belyaev, S.Y., Smirnova, N.D., Smirnov, P.O., Savchuk, D.A. Fast selective antialiasing for direct volume rendering](http://dx.doi.org/10.24132/JWSCG.2019.27.1.1)
-* [Savchuk, D.A., Belyaev, S.Y. Two-pass real-Time direct isosurface rendering algorithm optimization for HTC Vive and low performance devices](http://dx.doi.org/10.1117/12.2292183)
-* [Belyaev, S., Shubnikov, V., Motornyi, N. Adaptive screen sampling algorithm acceleration for volume rendering](https://www.scopus.com/record/display.uri?eid=2-s2.0-85063124756&origin=inward&txGid=79efa190ff7df9d2821ef08f7ac01e72)
-* [Belyaev, S., Smirnov, P., Shubnikov, V., Smirnova, N. Adaptive algorithm for accelerating direct isosurface rendering on GPU](https://www.scopus.com/record/display.uri?eid=2-s2.0-85059228722&doi=10.11989%2fJEST.1674-862X.71013102&origin=inward&txGid=a917c3aa38d38f5b6e1b5add9aa3bb29)
-
-## Demo app
-[Here](https://med3web.opensource.epam.com/) you can find a demo app.
-
-## Contribution
-See [Contributing Guide](./contributing.md).
-
-## License
-[Apache 2.0](./LICENCE.MD)
-
-Copyright (c) 2015–2021 [EPAM Systems, Inc.](https://www.epam.com/)
+Copyright: MID Lab, NCAI, COMSATS University Islamabad (CUI)

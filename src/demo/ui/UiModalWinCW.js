@@ -75,7 +75,7 @@ class UiModalWindowCenterWidth extends React.Component {
     // console.log('TODO: on Apply ...');
 
     this.reset();
-
+// const
     const store = this.props;
     const loaderDicom = store.loaderDicom;
     const volSet = store.volumeSet;

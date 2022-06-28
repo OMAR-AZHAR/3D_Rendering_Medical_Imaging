@@ -383,23 +383,12 @@ export default class UiHistogram extends React.Component {
    */
   render() {
     const vol = this.props.volume;
-    if (vol === undefined) {
-      return <p>UiHistogram.props volume is not defined !!!</p>;
-    }
+    // if (vol === undefined) {
+    //   return <p>UiHistogram.props volume is not defined !!!</p>;
+    // }
     if (vol === null) {
       return <p></p>;
     }
-    this.m_transfFuncCallback = this.props.transfFunc;
-    this.m_transfFuncUpdateCallback = this.props.transfFuncUpdate;
-  
-    // const cw = this.state.width;
-    // const ch = this.state.height;
-
-    const jsxHist = 
-      <div ref={ (mount) => {this.m_canvasOwner = mount} }>
-        {/* <canvas ref="canvasHistogram" width={cw} height={ch} 
-          onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp} onMouseMove={this.onMouseMove} /> */}
-      </div>;
-    return jsxHist;
+    
   }
 }

@@ -7,27 +7,14 @@ import StoreActionType from '../store/ActionTypes';
 import UiMain from './UiMain';
 import UiOpenMenu from './UiOpenMenu';
 import UiViewMode from './UiViewMode';
-// import UiAbout from './UiAbout';
 import UiSaveMenu from './UiSaveMenu';
-// import UiReportMenu from './UiReportMenu';
-// import UiFilterMenu from './UiFilterMenu';
-import UiModalText from './UiModalText';
-import UiModalAlert from './UiModalAlert';
-import UiErrConsole from './UiErrConsole';
-// import ModeView from '../store/ModeView';
+
 
 import BrowserDetector from '../engine/utils/BrowserDetector';
 
 class UiApp extends React.Component {
   constructor(props) {
     super(props);
-
-    this.onShowModalText = this.onShowModalText.bind(this);
-    this.onHideModalText = this.onHideModalText.bind(this);
-
-    this.onShowModalAlert = this.onShowModalAlert.bind(this);
-    this.onHideModalAlert = this.onHideModalAlert.bind(this);
-
     this.doShowProgressBar = this.doShowProgressBar.bind(this);
     this.doHideProgressBar = this.doHideProgressBar.bind(this);
     this.doSetProgressBarRatio = this.doSetProgressBarRatio.bind(this);
@@ -80,36 +67,10 @@ class UiApp extends React.Component {
     // browser detector
     const browserDetector = new BrowserDetector();
     this.isWebGl20supported = browserDetector.checkWebGlSupported();
-    if (!this.isWebGl20supported) {
-      this.setState({ strAlertTitle: 'Browser compatibility problem detected' });
-      this.setState({ strAlertText: 'This browser not supported WebGL 2.0. Application functinality is decreased and app can be unstable' });
-      this.onShowModalAlert();
-    } else {
-      const isValidBro = browserDetector.checkValidBrowser();
-      if (!isValidBro) {
-        this.setState({ strAlertTitle: 'Browser compatibility problem detected' });
-        this.setState({ strAlertText: 'App is specially designed for Chrome/Firefox/Opera/Safari browsers' });
-        this.onShowModalAlert();
-      }
-    }
+
   }
 
-  onShowModalText() {
-    this.setState({ showModalText: true });
-  }
-
-  onHideModalText() {
-    this.setState({ showModalText: false });
-  }
-
-  onShowModalAlert() {
-    this.setState({ showModalAlert: true });
-  }
-
-  onHideModalAlert() {
-    this.setState({ showModalAlert: false });
-  }
-
+ 
   doShowProgressBar(strProgressMsg) {
     if ((strProgressMsg === undefined) || (strProgressMsg === null)) {
       console.log('doShowProgressBar: need argument - strProgressMsg');
@@ -148,7 +109,6 @@ class UiApp extends React.Component {
     this.m_store = store;
     const isLoaded = store.isLoaded;
     const fileName = store.fileName;
-    const arrErrorsLoadedd = store.arrErrors;
 
     const strMessageOnMenu = (isLoaded) ? 'File: ' + fileName : 'Upload Files to Render';
 
@@ -181,21 +141,13 @@ class UiApp extends React.Component {
               <UiOpenMenu fileNameOnLoad={this.m_fileNameOnLoad} /> 
 
               <UiSaveMenu />
-              {/* <UiReportMenu /> */}
-              {/* {(store.modeView === ModeView.VIEW_2D) ? <UiFilterMenu /> : <p></p>} */}
-              {(isLoaded && this.isWebGl20supported) ? <UiViewMode /> : <p></p>}
+             <UiViewMode />
             </Nav>
           </Navbar.Collapse>
 
         </Navbar>
         {objProgressBar}
         {(isLoaded) ? <UiMain /> : <p></p>}
-        {(arrErrorsLoadedd.length > 0) ? <UiErrConsole /> : <p></p>}
-        <UiModalText stateVis={this.state.showModalText}
-          onHide={this.onHideModalText} onShow={this.onShowModalText} />
-        <UiModalAlert stateVis={this.state.showModalAlert}
-          onHide={this.onHideModalAlert} onShow={this.onShowModalAlert} 
-          title={this.state.strAlertTitle} text={this.state.strAlertText} />
       </Container>;
 
     return jsxNavBarReact;

@@ -1,4 +1,4 @@
-/* body{
+body{
   color: #fff;
 }
 .App {
@@ -32,4 +32,4 @@
   to {
     transform: rotate(360deg);
   }
-} */
+}

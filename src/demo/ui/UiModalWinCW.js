@@ -1,40 +1,22 @@
-/**
- * @fileOverview UiModalWinCW
- * @author Epam
- * @version 1.0.0
- */
-
-
-// ********************************************************
-// Imports
-// ********************************************************
-
-// special css for NoUiSlioder
-// import 'nouislider/distribute/nouislider.css';
+import ModeView from "../store/ModeView";
+import StoreActionType from "../store/ActionTypes";
 
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Modal, Container, Row, Col, Button, ListGroup } from 'react-bootstrap';
-
-import Nouislider from 'react-nouislider';
-
-// ********************************************************
-// Const
-// ********************************************************
+import { Modal, Container, Row, Col, Button, ButtonGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 const LARGE_NUMBER = 0x3FFFFFFF;
 const DEFAULT_WIN_MIN = 650 - 2000 / 2;
 const DEFAULT_WIN_MAX = 650 + 2000 / 2;
 
-// ********************************************************
-// Class
-// ********************************************************
 
 class UiModalWindowCenterWidth extends React.Component {
   constructor(props) {
     super(props);
+    this.m_needMode3dLight = true;
 
+    this.onMode3dLight = this.onMode3dLight.bind(this);
     this.m_objCanvas = null;
     this.m_dataMin = LARGE_NUMBER;
     this.m_dataMax = LARGE_NUMBER;
@@ -72,30 +54,28 @@ class UiModalWindowCenterWidth extends React.Component {
 
   //
   onButtonApply() {
-    // console.log('TODO: on Apply ...');
+//     console.log('TODO: on Apply Render file in 3d...');
 
-    this.reset();
-// const
-    const store = this.props;
-    const loaderDicom = store.loaderDicom;
-    const volSet = store.volumeSet;
+//     this.reset();
+// // const
+//     const store = this.props;
+    
+//     const loaderDicom = store.loaderDicom;
+//     const volSet = store.volumeSet;
 
-    // set loader features according current modal properties (window min, max)
-    loaderDicom.m_windowCenter = (this.state.windowMin + this.state.windowMax) * 0.5;
-    loaderDicom.m_windowWidth = (this.state.windowMax - this.state.windowMin);
+  
+//     const series = loaderDicom.m_slicesVolume.getSeries();
+//     const numSeries = series.length;
+//     for (let i = 0; i < numSeries; i++) {
+//       const hashCode = series[i].m_hash;
+//       loaderDicom.createVolumeFromSlices(volSet, i, hashCode);
+//     }
 
-    // apply for single slice dicom read
-    // select 1st slice and hash
-    const series = loaderDicom.m_slicesVolume.getSeries();
-    const numSeries = series.length;
-    for (let i = 0; i < numSeries; i++) {
-      const hashCode = series[i].m_hash;
-      loaderDicom.createVolumeFromSlices(volSet, i, hashCode);
-    }
+//     // hide this modal
+//     const onHideFunc = this.props.onHide;
+//     onHideFunc(true);
 
-    // hide this modal
-    const onHideFunc = this.props.onHide;
-    onHideFunc(true);
+
   }
 
   //
@@ -342,11 +322,6 @@ class UiModalWindowCenterWidth extends React.Component {
     // console.log(`data min max ready`);
   } // end get data min max
 
-  //
-  // Invoked from parent component once
-  // to initialize window range (if found in dicom tags)
-  // and detect data [min..max] range
-  //
   initWindowRange() {
     const store = this.props;
     const loaderDicom = store.loaderDicom;
@@ -357,7 +332,6 @@ class UiModalWindowCenterWidth extends React.Component {
       isValid = (loaderDicom.m_windowWidth <= 0) ? false : isValid;
 
       if (isValid) {
-        // console.log('initWindowRange: use predefined in tags window center, width');
         const wMin = Math.floor(loaderDicom.m_windowCenter - loaderDicom.m_windowWidth / 2);
         const wMax = Math.floor(loaderDicom.m_windowCenter + loaderDicom.m_windowWidth / 2);
         this.setState({ windowMin: wMin });
@@ -368,9 +342,53 @@ class UiModalWindowCenterWidth extends React.Component {
   } // end init
 
   // render 
-  render() {
 
-    //const stateVis = true;
+
+
+
+
+  
+
+
+onMode(indexMode) {
+  const store = this.props;
+  store.dispatch({
+    type: StoreActionType.SET_MODE_VIEW,
+    modeView: indexMode,
+  });
+}
+
+onMode3dLight() {
+  this.onMode(ModeView.VIEW_3D_LIGHT);
+
+console.log('TODO: on Apply Render file in 3d...');
+
+this.reset();
+// const
+const store = this.props;
+
+const loaderDicom = store.loaderDicom;
+const volSet = store.volumeSet;
+
+
+const series = loaderDicom.m_slicesVolume.getSeries();
+const numSeries = series.length;
+for (let i = 0; i < numSeries; i++) {
+  const hashCode = series[i].m_hash;
+  loaderDicom.createVolumeFromSlices(volSet, i, hashCode);
+}
+
+// hide this modal
+const onHideFunc = this.props.onHide;
+onHideFunc(true);
+}
+  render() {
+    const store = this.props;
+
+    let viewMode = store.modeView;
+
+    const str3dLight = viewMode === ModeView.VIEW_3D_LIGHT ? "primary" : "secondary";
+
     const stateVis = this.props.stateVis;
     const onHideFunc = this.props.onHide;
 
@@ -381,33 +399,31 @@ class UiModalWindowCenterWidth extends React.Component {
 
     const jsxCanvas = <canvas ref={ (mount) => {this.m_objCanvas = mount} } style={stylePreview} width="500px" height="400px" />;
 
-    const valToolTps = true;
+    // const valToolTps = true;
 
-    let valMin = 0;
-    let valMax = 5000;
-    let valDelta = valMax - valMin;
-    let valStep = 50;
+    // let valMin = 0;
+    // let valMax = 5000;
+    // let valDelta = valMax - valMin;
+    // let valStep = 50;
     if (this.m_dataMin !== LARGE_NUMBER) {
-      valMin = this.m_dataMin;
-      valMax = this.m_dataMax;
-      valDelta = valMax - valMin;
-      valStep = Math.floor(valDelta / 32);
+      // valMin = this.m_dataMin;
+      // valMax = this.m_dataMax;
+      // valDelta = valMax - valMin;
+      // valStep = Math.floor(valDelta / 32);
     }
 
-    const rangeTwo = {
-      'min': Math.floor(valMin - valDelta / 4),
-      'max': Math.floor(valMax + valDelta / 4)
-    }
-    const wMin = Math.floor(this.state.windowMin);
-    const wMax = Math.floor(this.state.windowMax);
-    const wArr = [wMin, wMax];
+    // const rangeTwo = {
+    //   'min': Math.floor(valMin - valDelta / 4),
+    //   'max': Math.floor(valMax + valDelta / 4)
+    // }
+    // const wMin = Math.floor(this.state.windowMin);
+    // const wMax = Math.floor(this.state.windowMax);
+    // const wArr = [wMin, wMax];
 
     const jxsModal = 
       <Modal show={stateVis} onHide={onHideFunc} size="xl">
         <Modal.Header closeButton>
-          <Modal.Title>
-            Select window center and width to display Dicom
-          </Modal.Title>
+         
         </Modal.Header>
         <Modal.Body>
           <Container>
@@ -419,30 +435,28 @@ class UiModalWindowCenterWidth extends React.Component {
               </Col>
             </Row>
 
-            <ListGroup>
-              <ListGroup.Item>
-                Window range <p> </p>
-              </ListGroup.Item>
-              <ListGroup.Item>
-                <Nouislider onSlide={this.onSliderWindowRange.bind(this)} ref={'sliderRange'}
-                  range={rangeTwo}
-                  start={wArr}
-                  step={valStep}
-                  connect={true}
-                  tooltips={valToolTps} />
-              </ListGroup.Item>
-            </ListGroup>
+           
 
             <Row>
               <Col xs md lg="5">
               </Col>
-              <Col xs md lg="2">
-                <Button onClick={this.onButtonApply}>
-                  Apply
-                </Button>
+              <Col xs md lg="3">
+              <ButtonGroup className="mr-2" aria-label="Top group">
+          <OverlayTrigger
+            key="3dLight"
+            placement="bottom"
+            overlay={
+              <Tooltip>Prepare 2D</Tooltip>
+            }
+          >
+            <Button variant={str3dLight} onClick={this.onMode3dLight }>
+              2D Image Creation
+             
+            </Button>
+          </OverlayTrigger>
+        </ButtonGroup>
               </Col>
-              <Col xs md lg="5">
-              </Col>
+            
             </Row>
           </Container>
 

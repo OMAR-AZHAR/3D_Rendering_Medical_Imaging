@@ -1,30 +1,9 @@
-/**
- * @fileOverview UiSaveMenu
- * @author Epam
- * @version 1.0.0
- */
-
-// ********************************************************
-// Imports
-// ********************************************************
-
 import React from 'react';
 import { connect } from 'react-redux';
 import { NavDropdown } from 'react-bootstrap';
 
 import UiModalSaveNifti from './UiModalSaveNifti';
 
-// ********************************************************
-// Const
-// ********************************************************
-
-// ********************************************************
-// Class
-// ********************************************************
-
-/**
- * Class UiSaveMenu some text later...
- */
 class UiSaveMenu extends React.Component {
   /**
    * @param {object} props - props from up level object

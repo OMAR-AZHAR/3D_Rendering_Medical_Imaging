@@ -1,13 +1,3 @@
-/**
- * @fileOverview UiModalSaveNifti
- * @author Epam
- * @version 1.0.0
- */
-
-// ********************************************************
-// Imports
-// ********************************************************
-
 import React from 'react';
 import { connect } from 'react-redux';
 

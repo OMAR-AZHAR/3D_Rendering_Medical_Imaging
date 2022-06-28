@@ -56,24 +56,7 @@ class UiModalWindowCenterWidth extends React.Component {
   onButtonApply() {
 //     console.log('TODO: on Apply Render file in 3d...');
 
-//     this.reset();
-// // const
-//     const store = this.props;
-    
-//     const loaderDicom = store.loaderDicom;
-//     const volSet = store.volumeSet;
 
-  
-//     const series = loaderDicom.m_slicesVolume.getSeries();
-//     const numSeries = series.length;
-//     for (let i = 0; i < numSeries; i++) {
-//       const hashCode = series[i].m_hash;
-//       loaderDicom.createVolumeFromSlices(volSet, i, hashCode);
-//     }
-
-//     // hide this modal
-//     const onHideFunc = this.props.onHide;
-//     onHideFunc(true);
 
 
   }

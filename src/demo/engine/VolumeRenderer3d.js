@@ -38,7 +38,7 @@ import MaterialVolumeRender from './gfx/matvolumerender';
 import VolumeFilter3D from './volumeFilter3d';
 import RoiPalette from './loaders/roipalette';
 import TetrahedronGenerator from './actvolume/tetra';
-import Graphics23d from './tools23d/graphics23d';
+// import Graphics23d from './tools23d/graphics23d';
 // import MaterialColor2d from './gfx/matcolor2d';
 
 
@@ -102,7 +102,6 @@ export default class VolumeRenderer3d {
     // this.sceneTetra = new THREE.Scene();
 
     this.scene23D = new THREE.Scene();
-    this.graphics23d = null;
     this.sceneSphere = new THREE.Scene();
     this.meshSphere = null;
     this.newScene = new THREE.Scene();
@@ -403,15 +402,7 @@ export default class VolumeRenderer3d {
   /**
    * Setting a variable for conditional compilation (Volume Render)
    */
-  switchToTool23D(isTool23D) {
-    this.Tool23D = isTool23D;
-    if (this.Tool23D) {
-      this.graphics23d = new Graphics23d(this.scene23D, this.windowWidth, this.windowHeight);
-    }
-    else {
-      this.graphics23d = null;
-    }
-  }
+ 
 
   switchToVolumeRender() {
     if (this.matVolumeRender !== null && this.matRenderToTexture !== null) {
@@ -1366,7 +1357,7 @@ export default class VolumeRenderer3d {
 
   onMouseDown(xx, yy) {
     if (this.Tool23D) {
-      this.graphics23d.onMouseDown(xx / this.windowWidth, yy / this.windowHeight);
+      // this.graphics23d.onMouseDown(xx / this.windowWidth, yy / this.windowHeight);
       return;
     }
     this.orbitControl.onMouseDown(xx, yy);
@@ -1385,7 +1376,7 @@ export default class VolumeRenderer3d {
   onMouseMove(xx, yy) {
     //this.tools23d.onMouseMove(xx / this.windowWidth, yy / this.windowHeight);
     if (this.Tool23D) {
-      this.graphics23d.onMouseMove(xx / this.windowWidth, yy / this.windowHeight);
+      // this.graphics23d.onMouseMove(xx / this.windowWidth, yy / this.windowHeight);
       return;
     }
     if (this.checkFrameBufferMode !== CHECK_MODE_RESULT_OK) {
@@ -1402,7 +1393,7 @@ export default class VolumeRenderer3d {
 
   onMouseUp( xx, yy ) {
     if (this.Tool23D) {
-      this.graphics23d.onMouseUp(xx / this.windowWidth, yy / this.windowHeight);
+      // this.graphics23d.onMouseUp(xx / this.windowWidth, yy / this.windowHeight);
       return;
     }
     //this.tools23d.onMouseUp(xx / this.windowWidth, yy / this.windowHeight);

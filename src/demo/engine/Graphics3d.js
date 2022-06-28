@@ -268,7 +268,6 @@ class Graphics3d extends React.Component {
       const volIndex = store.volumeIndex;
       vol = volSet.getVolume(volIndex);
     }
-    // const tex3d = this.props.texture3d;
     if (vol !== null) {
       this.volume = vol;
     }
@@ -276,36 +275,22 @@ class Graphics3d extends React.Component {
     const mode3d = store.mode3d;
     const modeView = store.modeView;
     if (this.m_volumeRenderer3D !== null) {
-      // console.log(`Graphics3d . mode = ${mode3d}`);
-      this.m_volumeRenderer3D.switchToTool23D(store.isTool3D);
       if (modeView !== ModeView.VIEW_3D) {
         if (mode3d === Modes3d.RAYCAST) {
-          //if (this.m_prevMode === Modes3d.EREASER) {
-          //this.m_volumeRenderer3D.setEraserMode(false);
-          //}
           this.m_prevMode = Modes3d.RAYCAST;
           this.m_volumeRenderer3D.setTransferFuncVec3([store.slider3d_r, store.slider3d_g, store.slider3d_b], 0);
           this.m_volumeRenderer3D.switchToVolumeRender();      
         }
         if (mode3d === Modes3d.ISO) {
-          //if (this.m_prevMode === Modes3d.EREASER) {
-          //  this.m_volumeRenderer3D.setEraserMode(false);
-          //}
           this.m_prevMode = Modes3d.ISO;
           this.m_volumeRenderer3D.switchToIsosurfRender();      
           this.m_volumeRenderer3D.setIsoThresholdValue(store.sliderIsosurface);
         }
         if (mode3d === Modes3d.RAYFAST) {
-          //if (this.m_prevMode === Modes3d.EREASER) {
-          //  this.m_volumeRenderer3D.setEraserMode(false);
-          //}
           this.m_prevMode = Modes3d.RAYFAST;
           this.m_volumeRenderer3D.switchToFLATRender();
         }
         if (mode3d === Modes3d.EREASER) {
-          //if (this.m_prevMode !== Modes3d.EREASER) {
-          //  this.m_volumeRenderer3D.setEraserMode(true);
-          //}
           this.m_prevMode = Modes3d.RAYFAST;
           this.m_volumeRenderer3D.switchToIsosurfRender();     
           this.m_volumeRenderer3D.setIsoThresholdValue(store.sliderIsosurface);

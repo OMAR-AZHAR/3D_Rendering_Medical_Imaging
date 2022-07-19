@@ -1,4 +1,4 @@
-# MID Lab DICOM 3D Renderer.
+# 3D Medical Image Renderer.
 
 MIDL 3D Renderer 3D is a high performance web tool for advanced visualization (both in 2D and 3D modes)
 medical volumetric data, provided in popular file formats: DICOM, NIfTI, KTX<sup>™</sup>, HDR.

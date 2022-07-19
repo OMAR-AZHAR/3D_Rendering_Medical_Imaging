@@ -41,3 +41,5 @@ so we use tricky way to build 2D texture from initial 3D texture by linking 2D s
 as a large tile map. This idea (with source codes) can be seen in project [WebGL Volume Rendering](https://github.com/lebarba/WebGLVolumeRendering).
 
 Copyright: MID Lab, NCAI, COMSATS University Islamabad (CUI)
+
+Demo: https://3drendering.netlify.app
